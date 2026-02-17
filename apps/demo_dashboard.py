@@ -199,11 +199,19 @@ def show_overview(data):
     fig = px.histogram(
         data['nist_controls'],
         x='fkgl_score',
-        nbins=10,
+        nbins=5,
         title="Flesch-Kincaid Grade Level Distribution",
         labels={'fkgl_score': 'FKGL Score', 'count': 'Frequency'},
-        color_discrete_sequence=['#1f77b4']
+        color_discrete_sequence=['#1f77b4'],
+        text_auto=True
     )
+    fig.update_layout(
+        bargap=0.1,
+        xaxis_title="FKGL Score (Readability Level)",
+        yaxis_title="Count",
+        showlegend=False
+    )
+    fig.update_traces(marker_line_color='white', marker_line_width=1.5)
     st.plotly_chart(fig, use_container_width=True)
 
 def show_nist_controls(df):
@@ -319,10 +327,19 @@ def show_nist_mitre_relationships(df):
     fig = px.histogram(
         df,
         x='mapping_confidence',
-        nbins=10,
+        nbins=5,
         title="Distribution of Mapping Confidence Scores",
-        labels={'mapping_confidence': 'Confidence Score', 'count': 'Frequency'}
+        labels={'mapping_confidence': 'Confidence Score', 'count': 'Frequency'},
+        color_discrete_sequence=['#2ca02c'],
+        text_auto=True
     )
+    fig.update_layout(
+        bargap=0.1,
+        xaxis_title="Confidence Score",
+        yaxis_title="Count",
+        showlegend=False
+    )
+    fig.update_traces(marker_line_color='white', marker_line_width=1.5)
     st.plotly_chart(fig, use_container_width=True)
 
 def show_knowledge_paths(paths_data):
