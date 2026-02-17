@@ -1,0 +1,79 @@
+[
+  {
+    "query": "How does SR-3 prevent supply chain compromises like SolarWinds?",
+    "nist_controls": [
+      "SR-3",
+      "SR-6",
+      "SA-12"
+    ],
+    "mitre_techniques": [
+      "T1195",
+      "T1195.001",
+      "T1195.002"
+    ],
+    "reasoning": "SR-3 establishes comprehensive supply chain risk management processes that directly address T1195 supply chain compromise techniques. Through supplier assessments (SR-6) and acquisition security controls (SA-12), organizations can detect and prevent malicious code injection during software development and distribution phases, mitigating sophisticated attacks like SolarWinds Orion compromise.",
+    "confidence": 0.94,
+    "path_length": 3
+  },
+  {
+    "query": "What controls detect compromised software dependencies?",
+    "nist_controls": [
+      "SR-3",
+      "CM-2",
+      "SI-4"
+    ],
+    "mitre_techniques": [
+      "T1195.001"
+    ],
+    "reasoning": "SR-3 supply chain controls combined with CM-2 baseline configuration management enable detection of unauthorized changes in software dependencies. SI-4 system monitoring provides continuous surveillance for anomalous behavior indicating compromised development tools or dependencies, addressing T1195.001 technique through multi-layered detection.",
+    "confidence": 0.91,
+    "path_length": 3
+  },
+  {
+    "query": "How do organizations verify hardware supply chain integrity?",
+    "nist_controls": [
+      "SR-6",
+      "SA-12",
+      "CM-2"
+    ],
+    "mitre_techniques": [
+      "T1195.003"
+    ],
+    "reasoning": "SR-6 supplier assessments and SA-12 acquisition security controls establish verification mechanisms for hardware components throughout procurement lifecycle. CM-2 baseline configurations document expected hardware states, enabling detection of T1195.003 hardware supply chain compromises through integrity validation and tamper-evident mechanisms.",
+    "confidence": 0.87,
+    "path_length": 3
+  },
+  {
+    "query": "What is the relationship between supply chain security and account compromise?",
+    "nist_controls": [
+      "SR-3",
+      "AC-2",
+      "IA-2"
+    ],
+    "mitre_techniques": [
+      "T1195",
+      "T1078"
+    ],
+    "reasoning": "Supply chain compromises (T1195) often lead to valid account abuse (T1078). SR-3 supply chain controls prevent initial compromise, while AC-2 account management and IA-2 authentication provide defense-in-depth by limiting damage from compromised supply chain components that may expose credentials.",
+    "confidence": 0.86,
+    "path_length": 4
+  },
+  {
+    "query": "How do AI systems increase supply chain risk?",
+    "nist_controls": [
+      "SR-3",
+      "SR-6"
+    ],
+    "mitre_techniques": [
+      "T1195.002"
+    ],
+    "ai_rmf_requirements": [
+      "MAP-1.3",
+      "MAP-2.1",
+      "MEASURE-2.7"
+    ],
+    "reasoning": "AI systems introduce complex supply chain dependencies through third-party models and datasets (MAP-1.3). Traditional SR-3 controls must be extended with AI-specific risk identification (MAP-2.1) and monitoring (MEASURE-2.7) to address T1195.002 software supply chain compromises in AI model pipelines and training data sources.",
+    "confidence": 0.88,
+    "path_length": 5
+  }
+]
