@@ -1,0 +1,11 @@
+control_id,family,name,description,priority
+AC-1,Access Control,Access Control Policy and Procedures,The organization develops and documents access control policies and procedures,High
+AC-2,Access Control,Account Management,The organization manages information system accounts,High
+AC-3,Access Control,Access Enforcement,The information system enforces approved authorizations,Critical
+AU-1,Audit and Accountability,Audit and Accountability Policy and Procedures,The organization develops audit and accountability policies,Medium
+AU-2,Audit and Accountability,Audit Events,The information system generates audit records,High
+CA-1,Security Assessment,Security Assessment Policy and Procedures,The organization develops security assessment policies,Medium
+CM-1,Configuration Management,Configuration Management Policy and Procedures,The organization develops configuration management policies,Medium
+IA-1,Identification and Authentication,Policy and Procedures,The organization develops identification and authentication policies,High
+IR-1,Incident Response,Incident Response Policy and Procedures,The organization develops incident response policies,High
+SC-1,System and Communications Protection,Policy and Procedures,The organization develops system protection policies,High

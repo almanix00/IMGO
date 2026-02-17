@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  imgo-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: imgo-demo
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - APP_TITLE=IMGO - Intelligent Multi-Framework Ontology Demo
+      - APP_VERSION=1.0.0-alpha
+      - ENVIRONMENT=demo
+    volumes:
+      - ./apps:/app/apps
+      - ./data:/app/data
+      - ./docs:/app/docs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  default:
+    name: imgo-network

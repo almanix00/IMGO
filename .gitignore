@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+venv/
+env/
+.venv/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Data (protect full datasets)
+data/full/
+data/private/
+*.db
+*.sqlite
+
+# Logs
+*.log
+logs/
+
+# OS
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints
+
+# Cache
+.cache/
+*.cache
+
+# Temporary
+*.tmp
+*.temp

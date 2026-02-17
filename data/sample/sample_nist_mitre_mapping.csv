@@ -1,0 +1,11 @@
+nist_control,mitre_technique,mapping_type,confidence,description
+AC-1,T1078,Mitigates,High,Access control policies mitigate valid account abuse
+AC-2,T1078,Mitigates,High,Account management prevents unauthorized account usage
+AC-3,T1078,Mitigates,Critical,Access enforcement blocks unauthorized credential usage
+AU-2,T1562,Detects,High,Audit events detect attempts to impair defenses
+AU-2,T1557,Detects,Medium,Audit logs can detect man-in-the-middle attacks
+IA-1,T1110,Mitigates,High,Authentication policies prevent brute force attacks
+IR-1,T1486,Responds,Critical,Incident response procedures address ransomware
+IR-1,T1499,Responds,High,Incident response handles denial of service
+SC-1,T1190,Mitigates,High,System protection prevents exploitation of public apps
+SC-1,T1557,Mitigates,Medium,Communications protection prevents interception
