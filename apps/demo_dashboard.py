@@ -51,6 +51,24 @@ st.markdown("""
         border-radius: 0.5rem;
         padding: 1rem;
         margin: 1rem 0;
+        color: #000000 !important;
+    }
+    .warning-box * {
+        color: #000000 !important;
+    }
+    .warning-box strong {
+        color: #000000 !important;
+        font-weight: bold;
+    }
+    /* Ensure all Streamlit info/warning elements have black text */
+    div[data-testid="stMarkdownContainer"] p {
+        color: inherit;
+    }
+    .stAlert {
+        color: #000000 !important;
+    }
+    .stAlert * {
+        color: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
