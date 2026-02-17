@@ -1,11 +1,11 @@
-nist_control,mitre_technique,mapping_type,confidence,description
-AC-1,T1078,Mitigates,High,Access control policies mitigate valid account abuse
-AC-2,T1078,Mitigates,High,Account management prevents unauthorized account usage
-AC-3,T1078,Mitigates,Critical,Access enforcement blocks unauthorized credential usage
-AU-2,T1562,Detects,High,Audit events detect attempts to impair defenses
-AU-2,T1557,Detects,Medium,Audit logs can detect man-in-the-middle attacks
-IA-1,T1110,Mitigates,High,Authentication policies prevent brute force attacks
-IR-1,T1486,Responds,Critical,Incident response procedures address ransomware
-IR-1,T1499,Responds,High,Incident response handles denial of service
-SC-1,T1190,Mitigates,High,System protection prevents exploitation of public apps
-SC-1,T1557,Mitigates,Medium,Communications protection prevents interception
+nist_control_id,mitre_technique_id,mapping_confidence,inference_path
+AC-2,T1078,0.89,Account Management → Valid Accounts
+AC-2,T1098,0.85,Account Management → Account Manipulation
+IA-2,T1078,0.92,Authentication → Valid Accounts
+AU-2,T1070,0.78,Event Logging → Indicator Removal
+SI-4,T1562,0.81,System Monitoring → Impair Defenses
+AC-3,T1078,0.87,Access Enforcement → Valid Accounts
+AU-6,T1070,0.76,Audit Review → Indicator Removal
+SC-7,T1018,0.83,Boundary Protection → Remote System Discovery
+IA-4,T1087,0.79,Identifier Management → Account Discovery
+CM-2,T1195,0.74,Baseline Configuration → Supply Chain Compromise

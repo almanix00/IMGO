@@ -1,11 +1,11 @@
-technique_id,tactic,name,description,platforms
-T1078,Initial Access,Valid Accounts,Adversaries may obtain credentials to access systems,Windows,Linux,macOS
-T1110,Credential Access,Brute Force,Adversaries may use brute force techniques to gain access,Windows,Linux,macOS,Cloud
-T1190,Initial Access,Exploit Public-Facing Application,Adversaries exploit internet-facing applications,Windows,Linux,Network
-T1566,Initial Access,Phishing,Adversaries send phishing messages to gain access,Windows,macOS,Linux
-T1486,Impact,Data Encrypted for Impact,Adversaries encrypt data to disrupt operations,Windows,Linux,macOS
-T1499,Impact,Endpoint Denial of Service,Adversaries perform DoS attacks on endpoints,Windows,Linux,macOS,Network
-T1530,Collection,Data from Cloud Storage Object,Adversaries access data from cloud storage,Cloud,SaaS
-T1557,Credential Access,Man-in-the-Middle,Adversaries position themselves to intercept traffic,Windows,Linux,macOS,Network
-T1562,Defense Evasion,Impair Defenses,Adversaries disable or modify security tools,Windows,Linux,macOS
-T1068,Privilege Escalation,Exploitation for Privilege Escalation,Adversaries exploit vulnerabilities to escalate privileges,Windows,Linux,macOS
+node_id,label,name,tactic,description
+T1078,MITRETechnique,Valid Accounts,Initial Access,Use of legitimate credentials
+T1098,MITRETechnique,Account Manipulation,Persistence,Manipulate accounts to maintain access
+T1136,MITRETechnique,Create Account,Persistence,Create accounts for persistence
+T1087,MITRETechnique,Account Discovery,Discovery,Attempt to get a listing of accounts
+T1562,MITRETechnique,Impair Defenses,Defense Evasion,Impair security monitoring tools
+T1070,MITRETechnique,Indicator Removal,Defense Evasion,Delete or modify artifacts
+T1550,MITRETechnique,Use Alternate Authentication,Defense Evasion,Use alternate authentication material
+T1018,MITRETechnique,Remote System Discovery,Discovery,Discover remote systems on a network
+T1049,MITRETechnique,System Network Connections Discovery,Discovery,List network connections
+T1195,MITRETechnique,Supply Chain Compromise,Initial Access,Manipulate products or delivery mechanisms

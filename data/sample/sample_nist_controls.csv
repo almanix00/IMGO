@@ -1,11 +1,11 @@
-control_id,family,name,description,priority
-AC-1,Access Control,Access Control Policy and Procedures,The organization develops and documents access control policies and procedures,High
-AC-2,Access Control,Account Management,The organization manages information system accounts,High
-AC-3,Access Control,Access Enforcement,The information system enforces approved authorizations,Critical
-AU-1,Audit and Accountability,Audit and Accountability Policy and Procedures,The organization develops audit and accountability policies,Medium
-AU-2,Audit and Accountability,Audit Events,The information system generates audit records,High
-CA-1,Security Assessment,Security Assessment Policy and Procedures,The organization develops security assessment policies,Medium
-CM-1,Configuration Management,Configuration Management Policy and Procedures,The organization develops configuration management policies,Medium
-IA-1,Identification and Authentication,Policy and Procedures,The organization develops identification and authentication policies,High
-IR-1,Incident Response,Incident Response Policy and Procedures,The organization develops incident response policies,High
-SC-1,System and Communications Protection,Policy and Procedures,The organization develops system protection policies,High
+node_id,label,family,title,description,fkgl_score
+AC-1,NISTControl,AC,Policy and Procedures,Develop and implement access control policies,12.8
+AC-2,NISTControl,AC,Account Management,Manage information system accounts,11.3
+AC-3,NISTControl,AC,Access Enforcement,Enforce approved authorizations,10.5
+IA-2,NISTControl,IA,Identification and Authentication,Uniquely identify and authenticate users,9.8
+IA-4,NISTControl,IA,Identifier Management,Manage information system identifiers,11.0
+AU-2,NISTControl,AU,Event Logging,Define auditable events,10.2
+AU-6,NISTControl,AU,Audit Record Review,Review and analyze audit records,9.5
+SC-7,NISTControl,SC,Boundary Protection,Monitor and control communications,11.8
+SI-4,NISTControl,SI,System Monitoring,Monitor the system to detect attacks,10.9
+CM-2,NISTControl,CM,Baseline Configuration,Develop and maintain baseline configurations,12.1

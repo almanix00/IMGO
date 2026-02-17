@@ -143,7 +143,7 @@ def show_overview(data):
     with col3:
         st.metric("AI RMF Mappings", len(data['ai_rmf_mapping']))
     with col4:
-        st.metric("Knowledge Paths", len(data['graphrag_paths']['knowledge_paths']))
+        st.metric("Knowledge Paths", len(data['graphrag_paths']))
     
     st.markdown("---")
     
@@ -151,12 +151,12 @@ def show_overview(data):
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("NIST Control Priorities")
-        priority_counts = data['nist_controls']['priority'].value_counts()
+        st.subheader("NIST Control Families")
+        family_counts = data['nist_controls']['family'].value_counts()
         fig = px.pie(
-            values=priority_counts.values,
-            names=priority_counts.index,
-            title="Distribution by Priority",
+            values=family_counts.values,
+            names=family_counts.index,
+            title="Distribution by Family",
             color_discrete_sequence=px.colors.sequential.Blues_r
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -176,16 +176,15 @@ def show_overview(data):
     
     st.markdown("---")
     
-    # Relationship summary
-    st.subheader("NIST-MITRE Relationship Types")
-    mapping_types = data['nist_mitre_mapping']['mapping_type'].value_counts()
-    fig = px.bar(
-        x=mapping_types.index,
-        y=mapping_types.values,
-        labels={'x': 'Relationship Type', 'y': 'Count'},
-        title="Distribution of Mapping Types",
-        color=mapping_types.values,
-        color_continuous_scale='Greens'
+    # FKGL Score Distribution
+    st.subheader("NIST Control Readability (FKGL Scores)")
+    fig = px.histogram(
+        data['nist_controls'],
+        x='fkgl_score',
+        nbins=10,
+        title="Flesch-Kincaid Grade Level Distribution",
+        labels={'fkgl_score': 'FKGL Score', 'count': 'Frequency'},
+        color_discrete_sequence=['#1f77b4']
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -201,20 +200,34 @@ def show_nist_controls(df):
         families = ['All'] + sorted(df['family'].unique().tolist())
         selected_family = st.selectbox("Filter by Family", families)
     with col2:
-        priorities = ['All'] + sorted(df['priority'].unique().tolist())
-        selected_priority = st.selectbox("Filter by Priority", priorities)
+        # FKGL range filter
+        fkgl_range = st.slider("FKGL Score Range", 
+                               float(df['fkgl_score'].min()), 
+                               float(df['fkgl_score'].max()),
+                               (float(df['fkgl_score'].min()), float(df['fkgl_score'].max())))
     
     # Apply filters
     filtered_df = df.copy()
     if selected_family != 'All':
         filtered_df = filtered_df[filtered_df['family'] == selected_family]
-    if selected_priority != 'All':
-        filtered_df = filtered_df[filtered_df['priority'] == selected_priority]
+    filtered_df = filtered_df[(filtered_df['fkgl_score'] >= fkgl_range[0]) & 
+                              (filtered_df['fkgl_score'] <= fkgl_range[1])]
     
     # Display
     st.dataframe(filtered_df, use_container_width=True, height=400)
     
     st.markdown(f"**Showing {len(filtered_df)} of {len(df)} controls**")
+    
+    # FKGL explanation
+    with st.expander("ℹ️ What is FKGL Score?"):
+        st.markdown("""
+        **Flesch-Kincaid Grade Level (FKGL)** measures text readability:
+        - **8-10**: Easy to read (8th-10th grade level)
+        - **11-12**: Average difficulty (High school level)
+        - **13+**: Difficult (College level or higher)
+        
+        Lower scores indicate more accessible documentation.
+        """)
 
 def show_mitre_techniques(df):
     """MITRE Techniques view"""
@@ -238,30 +251,23 @@ def show_mitre_techniques(df):
 
 def show_ai_rmf_mapping(df):
     """AI RMF Mapping view"""
-    st.header("🤖 NIST AI RMF to NIST 800-53 Mappings")
+    st.header("🤖 NIST AI RMF Requirements")
     
-    st.info("Displaying AI Risk Management Framework mappings to security controls (N=10)")
+    st.info("Displaying AI Risk Management Framework requirements (N=10)")
     
     # Filters
-    col1, col2 = st.columns(2)
-    with col1:
-        functions = ['All'] + sorted(df['ai_rmf_function'].unique().tolist())
-        selected_function = st.selectbox("Filter by AI RMF Function", functions)
-    with col2:
-        risk_levels = ['All'] + sorted(df['risk_level'].unique().tolist())
-        selected_risk = st.selectbox("Filter by Risk Level", risk_levels)
+    categories = ['All'] + sorted(df['category'].unique().tolist())
+    selected_category = st.selectbox("Filter by Category", categories)
     
-    # Apply filters
+    # Apply filter
     filtered_df = df.copy()
-    if selected_function != 'All':
-        filtered_df = filtered_df[filtered_df['ai_rmf_function'] == selected_function]
-    if selected_risk != 'All':
-        filtered_df = filtered_df[filtered_df['risk_level'] == selected_risk]
+    if selected_category != 'All':
+        filtered_df = filtered_df[filtered_df['category'] == selected_category]
     
     # Display
     st.dataframe(filtered_df, use_container_width=True, height=400)
     
-    st.markdown(f"**Showing {len(filtered_df)} of {len(df)} mappings**")
+    st.markdown(f"**Showing {len(filtered_df)} of {len(df)} requirements**")
 
 def show_nist_mitre_relationships(df):
     """NIST-MITRE Relationships view"""
@@ -272,31 +278,34 @@ def show_nist_mitre_relationships(df):
     # Filters
     col1, col2 = st.columns(2)
     with col1:
-        mapping_types = ['All'] + sorted(df['mapping_type'].unique().tolist())
-        selected_type = st.selectbox("Filter by Mapping Type", mapping_types)
+        nist_controls = ['All'] + sorted(df['nist_control_id'].unique().tolist())
+        selected_nist = st.selectbox("Filter by NIST Control", nist_controls)
     with col2:
-        confidences = ['All'] + sorted(df['confidence'].unique().tolist())
-        selected_confidence = st.selectbox("Filter by Confidence", confidences)
+        # Confidence slider
+        conf_range = st.slider("Confidence Range", 0.0, 1.0, (0.0, 1.0))
     
     # Apply filters
     filtered_df = df.copy()
-    if selected_type != 'All':
-        filtered_df = filtered_df[filtered_df['mapping_type'] == selected_type]
-    if selected_confidence != 'All':
-        filtered_df = filtered_df[filtered_df['confidence'] == selected_confidence]
+    if selected_nist != 'All':
+        filtered_df = filtered_df[filtered_df['nist_control_id'] == selected_nist]
+    filtered_df = filtered_df[(filtered_df['mapping_confidence'] >= conf_range[0]) & 
+                              (filtered_df['mapping_confidence'] <= conf_range[1])]
     
     # Display
     st.dataframe(filtered_df, use_container_width=True, height=400)
     
     st.markdown(f"**Showing {len(filtered_df)} of {len(df)} relationships**")
     
-    # Explanation
-    with st.expander("ℹ️ Mapping Type Explanations"):
-        st.markdown("""
-        - **Mitigates**: The NIST control prevents or reduces the effectiveness of the MITRE technique
-        - **Detects**: The NIST control can identify when the MITRE technique is being executed
-        - **Responds**: The NIST control provides mechanisms to respond to or recover from the MITRE technique
-        """)
+    # Confidence distribution
+    st.subheader("Mapping Confidence Distribution")
+    fig = px.histogram(
+        df,
+        x='mapping_confidence',
+        nbins=10,
+        title="Distribution of Mapping Confidence Scores",
+        labels={'mapping_confidence': 'Confidence Score', 'count': 'Frequency'}
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 def show_knowledge_paths(paths_data):
     """Knowledge Paths view"""
@@ -304,42 +313,51 @@ def show_knowledge_paths(paths_data):
     
     st.info("Displaying pre-computed knowledge graph reasoning paths (N=5)")
     
-    knowledge_paths = paths_data['knowledge_paths']
-    
     # Path selector
-    path_options = [f"{p['path_id']}: {p['source']} → {p['target']}" for p in knowledge_paths]
-    selected_path_idx = st.selectbox("Select Knowledge Path", range(len(path_options)), format_func=lambda x: path_options[x])
+    path_options = [f"{i+1}. {p['query']}" for i, p in enumerate(paths_data)]
+    selected_path_idx = st.selectbox("Select Query", range(len(path_options)), format_func=lambda x: path_options[x])
     
-    selected_path = knowledge_paths[selected_path_idx]
+    selected_path = paths_data[selected_path_idx]
     
     # Display path details
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.subheader("Path Details")
-        st.markdown(f"**Source**: `{selected_path['source']}`")
-        st.markdown(f"**Target**: `{selected_path['target']}`")
-        st.markdown(f"**Relationship**: `{selected_path['relationship']}`")
+        st.subheader("Query Details")
+        st.markdown(f"**Query**: {selected_path['query']}")
+        
+        st.markdown("#### Related NIST Controls")
+        for control in selected_path['nist_controls']:
+            st.markdown(f"- `{control}`")
+        
+        st.markdown("#### Related MITRE Techniques")
+        for technique in selected_path['mitre_techniques']:
+            st.markdown(f"- `{technique}`")
         
         st.markdown("#### Reasoning")
-        st.write(selected_path['reasoning'])
-        
-        st.markdown("#### Path Structure")
-        for i, node in enumerate(selected_path['path']):
-            st.markdown(f"{i+1}. **{node['label']}** (`{node['type']}`)")
-            st.text(f"   └─ {node['node']}")
+        st.info(selected_path['reasoning'])
     
     with col2:
-        st.subheader("Path Statistics")
-        st.metric("Path Length", len(selected_path['path']))
-        st.metric("Node Types", len(set(n['type'] for n in selected_path['path'])))
-        
-        # Visualize path as network
-        st.markdown("#### Path Flow")
-        for i in range(len(selected_path['path']) - 1):
-            current = selected_path['path'][i]
-            next_node = selected_path['path'][i + 1]
-            st.markdown(f"```\n{current['label']}\n   ↓\n{next_node['label']}\n```")
+        st.subheader("Path Metrics")
+        st.metric("Confidence", f"{selected_path['confidence']:.2f}")
+        st.metric("Path Length", selected_path['path_length'])
+        st.metric("NIST Controls", len(selected_path['nist_controls']))
+        st.metric("MITRE Techniques", len(selected_path['mitre_techniques']))
+    
+    st.markdown("---")
+    
+    # Overall statistics
+    st.subheader("Overall Path Statistics")
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        avg_confidence = sum(p['confidence'] for p in paths_data) / len(paths_data)
+        st.metric("Average Confidence", f"{avg_confidence:.2f}")
+    with col2:
+        avg_length = sum(p['path_length'] for p in paths_data) / len(paths_data)
+        st.metric("Average Path Length", f"{avg_length:.1f}")
+    with col3:
+        st.metric("Total Paths", len(paths_data))
 
 def show_about():
     """About page"""
@@ -360,9 +378,10 @@ def show_about():
     ### Key Features (Demo)
     - ✅ Browse sample NIST SP 800-53 controls
     - ✅ Explore sample MITRE ATT&CK techniques
-    - ✅ View AI RMF mappings
+    - ✅ View AI RMF requirements
     - ✅ Examine NIST-MITRE relationships
     - ✅ Explore pre-computed knowledge paths
+    - ✅ FKGL readability scores
     
     ### Limitations (Demo)
     - ❌ Limited to sample data (N=10)

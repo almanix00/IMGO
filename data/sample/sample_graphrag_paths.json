@@ -1,78 +1,71 @@
-{
-  "metadata": {
-    "version": "1.0.0-alpha",
-    "sample_size": 10,
-    "description": "Sample knowledge graph paths demonstrating IMGO relationships",
-    "note": "This is a simplified demonstration. Full GraphRAG capabilities require complete dataset."
+[
+  {
+    "query": "How to prevent valid account attacks?",
+    "nist_controls": [
+      "AC-2",
+      "IA-2",
+      "AU-6"
+    ],
+    "mitre_techniques": [
+      "T1078"
+    ],
+    "reasoning": "Account management and authentication controls mitigate valid account attacks",
+    "confidence": 0.91,
+    "path_length": 3
   },
-  "knowledge_paths": [
-    {
-      "path_id": "PATH-001",
-      "source": "NIST AC-3",
-      "target": "MITRE T1078",
-      "relationship": "MITIGATES",
-      "path": [
-        {"node": "NIST AC-3", "type": "Control", "label": "Access Enforcement"},
-        {"node": "Access Control Policy", "type": "Policy", "label": "Policy Domain"},
-        {"node": "MITRE T1078", "type": "Technique", "label": "Valid Accounts"}
-      ],
-      "reasoning": "Access enforcement controls directly mitigate unauthorized use of valid credentials"
-    },
-    {
-      "path_id": "PATH-002",
-      "source": "AI RMF Govern",
-      "target": "NIST AC-1",
-      "relationship": "REQUIRES",
-      "path": [
-        {"node": "AI RMF Govern", "type": "Framework", "label": "AI Governance"},
-        {"node": "Accountability", "type": "Category", "label": "AI Accountability"},
-        {"node": "NIST AC-1", "type": "Control", "label": "Access Control Policy"}
-      ],
-      "reasoning": "AI governance frameworks require formal access control policies for accountability"
-    },
-    {
-      "path_id": "PATH-003",
-      "source": "MITRE T1486",
-      "target": "NIST IR-1",
-      "relationship": "ADDRESSED_BY",
-      "path": [
-        {"node": "MITRE T1486", "type": "Technique", "label": "Ransomware"},
-        {"node": "Impact", "type": "Tactic", "label": "Impact Phase"},
-        {"node": "Incident Response", "type": "Process", "label": "Response Process"},
-        {"node": "NIST IR-1", "type": "Control", "label": "IR Policy"}
-      ],
-      "reasoning": "Ransomware attacks are addressed through formal incident response procedures"
-    },
-    {
-      "path_id": "PATH-004",
-      "source": "AI RMF Measure",
-      "target": "NIST AU-6",
-      "relationship": "IMPLEMENTS",
-      "path": [
-        {"node": "AI RMF Measure", "type": "Framework", "label": "AI Measurement"},
-        {"node": "Monitoring", "type": "Category", "label": "Continuous Monitoring"},
-        {"node": "NIST AU-6", "type": "Control", "label": "Audit Review"}
-      ],
-      "reasoning": "AI system measurement requires continuous audit monitoring and review"
-    },
-    {
-      "path_id": "PATH-005",
-      "source": "NIST SC-1",
-      "target": "MITRE T1190",
-      "relationship": "MITIGATES",
-      "path": [
-        {"node": "NIST SC-1", "type": "Control", "label": "System Protection Policy"},
-        {"node": "Communications Protection", "type": "Domain", "label": "Protection Domain"},
-        {"node": "Public-Facing Systems", "type": "Asset", "label": "Internet-Facing"},
-        {"node": "MITRE T1190", "type": "Technique", "label": "Exploit Public App"}
-      ],
-      "reasoning": "System protection policies help prevent exploitation of internet-facing applications"
-    }
-  ],
-  "statistics": {
-    "total_paths": 5,
-    "avg_path_length": 3.4,
-    "relationship_types": ["MITIGATES", "REQUIRES", "ADDRESSED_BY", "IMPLEMENTS"],
-    "node_types": ["Control", "Technique", "Framework", "Policy", "Process", "Category"]
+  {
+    "query": "What controls address supply chain risks?",
+    "nist_controls": [
+      "CM-2"
+    ],
+    "mitre_techniques": [
+      "T1195"
+    ],
+    "reasoning": "Baseline configuration controls help detect supply chain compromises",
+    "confidence": 0.74,
+    "path_length": 2
+  },
+  {
+    "query": "How to detect account manipulation?",
+    "nist_controls": [
+      "AC-2",
+      "AU-2",
+      "AU-6"
+    ],
+    "mitre_techniques": [
+      "T1098"
+    ],
+    "reasoning": "Account management combined with logging and audit review detects manipulation",
+    "confidence": 0.85,
+    "path_length": 3
+  },
+  {
+    "query": "What defenses prevent indicator removal?",
+    "nist_controls": [
+      "AU-2",
+      "AU-6",
+      "SI-4"
+    ],
+    "mitre_techniques": [
+      "T1070"
+    ],
+    "reasoning": "Comprehensive logging and monitoring prevents successful indicator removal",
+    "confidence": 0.78,
+    "path_length": 3
+  },
+  {
+    "query": "How to protect against defense evasion?",
+    "nist_controls": [
+      "SI-4",
+      "AU-6",
+      "SC-7"
+    ],
+    "mitre_techniques": [
+      "T1562",
+      "T1550"
+    ],
+    "reasoning": "System monitoring and boundary protection detect defense evasion attempts",
+    "confidence": 0.82,
+    "path_length": 3
   }
-}
+]
