@@ -97,11 +97,11 @@ docker-compose down
 
 ### 1. Data Browser
 
-Explore sample datasets:
-- **NIST Controls**: 10 security controls from SP 800-53
-- **MITRE Techniques**: 10 attack techniques from ATT&CK
-- **AI RMF Mappings**: 10 AI framework mappings
-- **Relationships**: 10 NIST-MITRE mappings
+Explore sample datasets focused on **SR-3 Supply Chain Risk Management**:
+- **NIST Controls**: 9 controls (SR-3, SR-6, SA-12 focus) with FKGL scores 17.3-24.5
+- **MITRE Techniques**: 10 techniques (T1195 Supply Chain Compromise focus)
+- **AI RMF Requirements**: 5 AI governance requirements
+- **Mappings**: 10 NIST-MITRE relationships with confidence scores 0.79-0.94
 
 ### 2. Interactive Dashboard
 
@@ -112,17 +112,19 @@ Explore sample datasets:
 
 ### 3. Knowledge Paths
 
-Explore 5 pre-computed reasoning paths showing:
-- Multi-hop relationships
-- Path structure visualization
-- Reasoning explanations
+Explore 5 pre-computed **SR-3 focused** reasoning paths showing:
+- Supply chain compromise scenarios (SolarWinds-style attacks)
+- Multi-control mitigation strategies
+- AI supply chain risk considerations
+- Confidence scores and inference paths
 
 ### 4. Statistics
 
 View dataset summaries and distributions:
-- Priority distributions
-- Tactic classifications
-- Mapping type breakdowns
+- FKGL readability scores (17.3-24.5, graduate level)
+- Control family distributions (SR, AC, IA, AU, SI, CM, RA)
+- MITRE tactic classifications
+- Mapping confidence distributions
 
 ---
 
@@ -133,13 +135,13 @@ View dataset summaries and distributions:
 ├── apps/
 │   └── demo_dashboard.py          # Main Streamlit app
 ├── data/
-│   └── sample/                    # Sample datasets (N=10)
+│   └── sample/                    # Sample datasets (SR-3 focused)
 │       ├── README.md
-│       ├── sample_nist_controls.csv
-│       ├── sample_mitre_techniques.csv
-│       ├── sample_ai_rmf_mapping.csv
-│       ├── sample_nist_mitre_mapping.csv
-│       └── sample_graphrag_paths.json
+│       ├── nist_controls_sample.csv      # N=9 (FKGL: 17.3-24.5)
+│       ├── mitre_techniques_sample.csv   # N=10 (T1195 focused)
+│       ├── ai_rmf_sample.csv             # N=5 (GOVERN/MAP)
+│       ├── mapping_sample.csv            # N=10 (Confidence: 0.79-0.94)
+│       └── graphrag_paths_sample.json    # N=5 (SR-3 scenarios)
 ├── docs/
 │   ├── architecture.md            # System architecture
 │   └── data_dictionary.md         # Data specifications

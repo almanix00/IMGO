@@ -1,0 +1,11 @@
+nist_control_id,mitre_technique_id,mapping_confidence,inference_path
+SR-3,T1195,0.94,SR-3: Supply Chain Controls → T1195: Supply Chain Compromise [DIRECT MITIGATION]
+SR-3,T1195.001,0.91,SR-3: Supplier Security → T1195.001: Development Tools Compromise [SUBPROCESS CONTROL]
+SR-3,T1195.002,0.92,SR-3: Software Supply Chain → T1195.002: Software Supply Chain [TARGETED MITIGATION]
+SR-6,T1195,0.88,SR-6: Supplier Assessment → T1195: Supply Chain Compromise [PREVENTIVE CONTROL]
+SA-12,T1195.003,0.87,SA-12: Acquisition Security → T1195.003: Hardware Supply Chain [HARDWARE FOCUS]
+AC-2,T1078,0.89,AC-2: Account Management → T1078: Valid Accounts [ACCOUNT CONTROL]
+IA-2,T1078,0.9,IA-2: Authentication → T1078: Valid Accounts [AUTHENTICATION BARRIER]
+SI-4,T1562,0.82,SI-4: System Monitoring → T1562: Impair Defenses [DETECTION CONTROL]
+AU-2,T1070,0.79,AU-2: Audit Events → T1070: Indicator Removal [FORENSIC EVIDENCE]
+CM-2,T1195,0.81,CM-2: Baseline Configuration → T1195: Supply Chain Compromise [INTEGRITY VERIFICATION]

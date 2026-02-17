@@ -59,12 +59,12 @@ st.markdown("""
 def load_data():
     """Load all sample datasets"""
     try:
-        nist_controls = pd.read_csv(DATA_PATH / "sample_nist_controls.csv")
-        mitre_techniques = pd.read_csv(DATA_PATH / "sample_mitre_techniques.csv")
-        ai_rmf_mapping = pd.read_csv(DATA_PATH / "sample_ai_rmf_mapping.csv")
-        nist_mitre_mapping = pd.read_csv(DATA_PATH / "sample_nist_mitre_mapping.csv")
+        nist_controls = pd.read_csv(DATA_PATH / "nist_controls_sample.csv")
+        mitre_techniques = pd.read_csv(DATA_PATH / "mitre_techniques_sample.csv")
+        ai_rmf_mapping = pd.read_csv(DATA_PATH / "ai_rmf_sample.csv")
+        nist_mitre_mapping = pd.read_csv(DATA_PATH / "mapping_sample.csv")
         
-        with open(DATA_PATH / "sample_graphrag_paths.json", 'r') as f:
+        with open(DATA_PATH / "graphrag_paths_sample.json", 'r') as f:
             graphrag_paths = json.load(f)
         
         return {

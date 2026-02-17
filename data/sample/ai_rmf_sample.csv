@@ -1,0 +1,6 @@
+requirement_id,category,title,description
+GOVERN-1.1,Governance,Legal and Regulatory Requirements for AI Supply Chain,Organizations establish processes to ensure AI system procurement and development comply with applicable legal frameworks for supply chain security
+MAP-1.3,Map,AI System Supply Chain Context,"Organizations map and document AI system supply chain dependencies including third-party models, datasets, and infrastructure components"
+GOVERN-2.2,Governance,Third-Party AI Risk Management,Accountability structures established for managing risks from third-party AI system providers and supply chain partners
+MAP-2.1,Map,AI Supply Chain Risk Identification,"Organizations identify and document potential risks from AI model poisoning, data tampering, and supply chain compromises"
+MEASURE-2.7,Measure,AI Supply Chain Monitoring,Continuous monitoring mechanisms implemented to detect anomalies in AI system behavior that may indicate supply chain compromise

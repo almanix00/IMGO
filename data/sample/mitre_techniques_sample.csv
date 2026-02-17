@@ -1,0 +1,11 @@
+node_id,label,name,tactic,description
+T1195,MITRETechnique,Supply Chain Compromise,Initial Access,Adversaries manipulate products or product delivery mechanisms prior to receipt by final consumer to achieve data or system compromise
+T1195.001,MITRETechnique,Compromise Software Dependencies and Development Tools,Initial Access,Adversaries manipulate software dependencies and development tools to compromise software supply chain
+T1195.002,MITRETechnique,Compromise Software Supply Chain,Initial Access,Adversaries manipulate application software prior to receipt by final consumer to achieve code execution
+T1195.003,MITRETechnique,Compromise Hardware Supply Chain,Initial Access,Adversaries manipulate hardware components during production or delivery to compromise target systems
+T1078,MITRETechnique,Valid Accounts,Initial Access,"Adversaries obtain and abuse credentials of existing accounts as means of gaining initial access, persistence, or privilege escalation"
+T1098,MITRETechnique,Account Manipulation,Persistence,Adversaries manipulate accounts to maintain access to victim systems by modifying credentials or permission groups
+T1562,MITRETechnique,Impair Defenses,Defense Evasion,Adversaries prevent security tools from detecting or responding to their behavior by disabling or modifying defensive capabilities
+T1070,MITRETechnique,Indicator Removal,Defense Evasion,Adversaries delete or modify artifacts generated on systems to remove evidence of their presence or hinder defenses
+T1190,MITRETechnique,Exploit Public-Facing Application,Initial Access,Adversaries exploit software vulnerabilities in internet-facing applications to gain initial access to victim networks
+T1059,MITRETechnique,Command and Scripting Interpreter,Execution,"Adversaries abuse command and script interpreters to execute commands, scripts, or binaries on victim systems"
