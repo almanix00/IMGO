@@ -11,6 +11,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import json
+import numpy as np
 from pathlib import Path
 
 # Page configuration
@@ -129,7 +130,15 @@ def main():
     )
     
     st.sidebar.markdown("---")
-    st.sidebar.info(f"**Version**: {VERSION}\n\n**Sample Size**: N=10 per dataset")
+    st.sidebar.markdown(
+        f"""
+        <div style='background-color: #2e3949; padding: 1rem; border-radius: 0.5rem; color: #ffffff;'>
+            <p style='margin: 0; color: #ffffff;'><strong style='color: #4da6ff;'>Version:</strong> {VERSION}</p>
+            <p style='margin: 0.5rem 0 0 0; color: #ffffff;'><strong style='color: #4da6ff;'>Sample Size:</strong> N=10 per dataset</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     
     # Page routing
     if page == "Overview":
@@ -196,23 +205,43 @@ def show_overview(data):
     
     # FKGL Score Distribution
     st.subheader("NIST Control Readability (FKGL Scores)")
-    fig = px.histogram(
-        data['nist_controls'],
-        x='fkgl_score',
-        nbins=5,
-        title="Flesch-Kincaid Grade Level Distribution",
-        labels={'fkgl_score': 'FKGL Score', 'count': 'Frequency'},
-        color_discrete_sequence=['#1f77b4'],
-        text_auto=True
-    )
+    
+    # Manual histogram calculation for better control
+    fkgl_scores = data['nist_controls']['fkgl_score'].values
+    counts, bins = np.histogram(fkgl_scores, bins=5)
+    bin_centers = (bins[:-1] + bins[1:]) / 2
+    bin_labels = [f"{bins[i]:.1f}-{bins[i+1]:.1f}" for i in range(len(bins)-1)]
+    
+    fig = go.Figure(data=[
+        go.Bar(
+            x=bin_labels,
+            y=counts,
+            text=counts,
+            textposition='outside',
+            marker=dict(
+                color='#1f77b4',
+                line=dict(color='white', width=2)
+            )
+        )
+    ])
+    
     fig.update_layout(
-        bargap=0.1,
-        xaxis_title="FKGL Score (Readability Level)",
+        title="Flesch-Kincaid Grade Level Distribution",
+        xaxis_title="FKGL Score Range (Readability Level)",
         yaxis_title="Count",
-        showlegend=False
+        showlegend=False,
+        bargap=0.2,
+        height=400,
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)'
     )
-    fig.update_traces(marker_line_color='white', marker_line_width=1.5)
+    
     st.plotly_chart(fig, use_container_width=True)
+    
+    # Show actual data points
+    with st.expander("📊 View Individual FKGL Scores"):
+        score_df = data['nist_controls'][['node_id', 'title', 'fkgl_score']].sort_values('fkgl_score')
+        st.dataframe(score_df, use_container_width=True)
 
 def show_nist_controls(df):
     """NIST Controls view"""
@@ -324,22 +353,36 @@ def show_nist_mitre_relationships(df):
     
     # Confidence distribution
     st.subheader("Mapping Confidence Distribution")
-    fig = px.histogram(
-        df,
-        x='mapping_confidence',
-        nbins=5,
-        title="Distribution of Mapping Confidence Scores",
-        labels={'mapping_confidence': 'Confidence Score', 'count': 'Frequency'},
-        color_discrete_sequence=['#2ca02c'],
-        text_auto=True
-    )
+    
+    # Manual histogram calculation
+    conf_scores = df['mapping_confidence'].values
+    counts, bins = np.histogram(conf_scores, bins=5)
+    bin_labels = [f"{bins[i]:.2f}-{bins[i+1]:.2f}" for i in range(len(bins)-1)]
+    
+    fig = go.Figure(data=[
+        go.Bar(
+            x=bin_labels,
+            y=counts,
+            text=counts,
+            textposition='outside',
+            marker=dict(
+                color='#2ca02c',
+                line=dict(color='white', width=2)
+            )
+        )
+    ])
+    
     fig.update_layout(
-        bargap=0.1,
-        xaxis_title="Confidence Score",
+        title="Distribution of Mapping Confidence Scores",
+        xaxis_title="Confidence Score Range",
         yaxis_title="Count",
-        showlegend=False
+        showlegend=False,
+        bargap=0.2,
+        height=400,
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)'
     )
-    fig.update_traces(marker_line_color='white', marker_line_width=1.5)
+    
     st.plotly_chart(fig, use_container_width=True)
 
 def show_knowledge_paths(paths_data):
