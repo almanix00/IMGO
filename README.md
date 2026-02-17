@@ -215,19 +215,56 @@ View dataset summaries and distributions:
 
 ### Sample Data
 
-All sample data in this demo is:
-- ✅ Derived from public sources
-- ✅ Anonymized and aggregated
-- ✅ Limited to N=10 per dataset
-- ✅ Safe for public distribution
+## 📊 Sample Data
 
-### Full Dataset (Not Included)
+This repository includes **sample data (N=10)** for demonstration purposes:
 
-The complete ISGO v2.1 datasets:
-- ❌ Not publicly available
-- ❌ Contain sensitive mappings
-- ❌ Require research agreements
-- ❌ Subject to data use restrictions
+| Dataset | Count | Description |
+|---------|-------|-------------|
+| NIST Controls | 9 | SR-3 (Supply Chain Risk Management) centered |
+| MITRE Techniques | 10 | T1195 (Supply Chain Compromise) focused |
+| NIST-MITRE Mappings | 10 | Deterministic relationships (confidence 0.79-0.94) |
+| AI RMF Requirements | 5 | GOVERN, MAP categories |
+| GraphRAG Paths | 5 | SR-3 supply chain scenarios |
+
+### Representative Scenario: SR-3 Supply Chain Risk
+
+The sample data demonstrates **supply chain security governance**, showing how NIST SP 800-53 controls (SR-3, SR-6, SA-12) mitigate supply chain compromise attacks (MITRE T1195) through:
+- Supplier risk assessments
+- Protection mechanisms
+- Risk management strategies
+
+### Data Source & Privacy
+
+**Sample Data Characteristics**:
+- ✅ Derived from **public standards** (NIST SP 800-53 Rev. 5, MITRE ATT&CK v14)
+- ✅ **Real FKGL scores** (17.3-24.5) from actual NIST documentation
+- ✅ **Safe for public distribution** (N=10, no sensitive information)
+- ✅ Representative of research methodology
+
+**Full Dataset (Not Included)**:
+
+The complete ISGO v2.1 research dataset contains:
+- **1,642 nodes** (324 NIST base controls → 1,196 granular nodes; 1,316 MITRE techniques → 356 validated mappings)
+- **41,911 semantic relationships** (20,104 MITIGATES edges, 215 ALIGNS_WITH edges)
+- ChromaDB vector embeddings for GraphRAG reasoning
+
+**Availability**: The full dataset is **not publicly available** due to:
+- Proprietary research methodology
+- Ongoing academic publication process
+- Data use agreements with institutional review
+
+**For Academic Research**: Please contact the author for collaboration opportunities. Full dataset access may be granted upon:
+- Formal research proposal
+- Institutional review board approval
+- Data use agreement signature
+
+---
+
+**Related Projects**:
+- 📚 Base Research: ISGO v2.1 (Private Repository)
+- 🎓 Institution: [Caroline University]
+
 
 ---
 
