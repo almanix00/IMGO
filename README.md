@@ -46,6 +46,7 @@ This is a **demonstration version** with **sample data (N=10)** for public showc
 ✅ Explore framework mappings and relationships  
 ✅ Visualize pre-computed knowledge paths  
 ✅ Interactive data exploration dashboard  
+✅ **View BFO compliance and ontology standardization details**  
 
 ### What's Not Included (Full Version Only)
 
@@ -128,6 +129,17 @@ View dataset summaries and distributions:
 - MITRE tactic classifications
 - Mapping confidence distributions
 
+### 5. BFO Compliance Information
+
+View **ISGO v3.0** BFO standardization details:
+- **Sidebar Badge**: ISO/IEC 21838-2 compliance status and coverage metrics
+- **About Page**: Comprehensive BFO integration information including:
+  - Ontology statistics (1,642 nodes, 41,911 relationships)
+  - BFO class mappings (NISTControl, MITRETechnique, AIRMFRequirement)
+  - BFO relationship properties (realized_in, is_about, participates_in)
+  - Benefits of BFO standardization
+  - Links to ISGO v3.0 repository and documentation
+
 ---
 
 ## 📁 Project Structure
@@ -135,7 +147,7 @@ View dataset summaries and distributions:
 ```
 /home/user/webapp/
 ├── apps/
-│   └── demo_dashboard.py          # Main Streamlit app
+│   └── demo_dashboard.py          # Main Streamlit app (with BFO UI)
 ├── data/
 │   └── sample/                    # Sample datasets (SR-3 focused)
 │       ├── README.md
@@ -144,6 +156,13 @@ View dataset summaries and distributions:
 │       ├── ai_rmf_sample.csv             # N=5 (GOVERN/MAP)
 │       ├── mapping_sample.csv            # N=10 (Confidence: 0.79-0.94)
 │       └── graphrag_paths_sample.json    # N=5 (SR-3 scenarios)
+├── neo4j_bfo/                     # BFO Integration Scripts
+│   ├── schema.cypher              # Complete BFO-compliant schema
+│   ├── 01_add_bfo_labels.cypher   # Add BFO labels to nodes
+│   ├── 02_add_bfo_relationship_properties.cypher  # Add BFO properties
+│   ├── 03_verify_bfo_integration.cypher           # Verification queries
+│   ├── 00_update_consensus_validation.cypher      # Consensus mappings
+│   └── integration_test.cypher    # Integration tests
 ├── docs/
 │   ├── architecture.md            # System architecture
 │   └── data_dictionary.md         # Data specifications
@@ -152,6 +171,9 @@ View dataset summaries and distributions:
 ├── requirements.txt               # Python dependencies
 ├── .env.example                   # Configuration template
 └── README.md                      # This file
+```
+
+---
 ```
 
 ---
