@@ -8,6 +8,8 @@
 ![Streamlit](https://img.shields.io/badge/streamlit-1.31.0-red)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ed)
 ![Status](https://img.shields.io/badge/status-demo-yellow)
+[![BFO Compliant](https://img.shields.io/badge/BFO-ISO%2FIEC%2021838--2-blue)](https://basic-formal-ontology.org/)
+[![Ontology](https://img.shields.io/badge/Ontology-Standardized%20via%20BFO-success)](https://github.com/almanix00/ISGO)
 
 **Public demonstration version of ISGO v2.1 research project**
 
@@ -181,6 +183,83 @@ View dataset summaries and distributions:
 | NIST SP 800-53 | Rev. 5 | [NIST](https://csrc.nist.gov/) | Public Domain |
 | MITRE ATT&CK | v14 | [MITRE](https://attack.mitre.org/) | Free Use |
 | NIST AI RMF | 1.0 | [NIST](https://www.nist.gov/itl/ai-risk-management-framework) | Public Domain |
+
+---
+
+## 🏛️ Standardized via BFO (Basic Formal Ontology)
+
+**ISGO v3.0** is now **ISO/IEC 21838-2 compliant**, integrating the Basic Formal Ontology (BFO) standard for robust, interoperable ontology design.
+
+### BFO Integration Overview
+
+- **Standard**: ISO/IEC 21838-2 (Basic Formal Ontology)
+- **Status**: Production-ready, deployed on GitHub main branch
+- **Repository**: [ISGO v3.0](https://github.com/almanix00/ISGO)
+
+### Ontology Statistics
+
+| Metric | Count | BFO Coverage |
+|--------|-------|--------------|
+| **Total Nodes** | 1,642 | 100% BFO-categorized |
+| **Total Relationships** | 41,911 | 100% BFO property-mapped |
+| **MITIGATES** | 20,658 | `realized_in` |
+| **ADDRESSES/RELATED_TO/BELONGS_TO** | 21,219 | `is_about` |
+| **USES** | 34 | `participates_in` |
+| **Consensus Mappings** | 1,567 | Cross-validated (DeepSeek-V3 + GPT-4o) |
+
+### BFO Class Mappings
+
+#### Upper-Level Classes
+
+```
+Continuant (계속체 - time-independent entities)
+├─ IndependentContinuant (독립 계속체)
+├─ SpecificallyDependentContinuant (특정 의존 계속체)
+└─ GenericallyDependentContinuant (일반 의존 계속체)
+   └─ InformationContentEntity (정보 내용 개체)
+
+Occurrent (발생체 - time-dependent entities)
+└─ Process (과정)
+```
+
+#### Domain Class Mappings
+
+- **NISTControl** → `Continuant:InformationContentEntity`
+- **AIRMFRequirement** → `Continuant:InformationContentEntity`
+- **MITRETechnique** → `Occurrent:Process`
+- **Asset** → `IndependentContinuant`
+- **System** → `IndependentContinuant`
+
+### BFO Relationship Properties
+
+| Relationship | BFO Property | Example |
+|--------------|--------------|---------|
+| MITIGATES | `realized_in` | (SR-3)-[:MITIGATES {bfo_type: "realized_in"}]->(T1195) |
+| ADDRESSES/RELATED_TO/BELONGS_TO | `is_about` | (SR-3)-[:RELATED_TO {bfo_type: "is_about"}]->(SA-8) |
+| USES | `participates_in` | (Asset)-[:USES {bfo_type: "participates_in"}]->(T1195) |
+
+### Neo4j Cypher Scripts
+
+All BFO integration scripts are available in the [`neo4j_bfo/`](neo4j_bfo/) directory:
+
+- **[schema.cypher](neo4j_bfo/schema.cypher)**: Complete BFO-compliant schema
+- **[01_add_bfo_labels.cypher](neo4j_bfo/01_add_bfo_labels.cypher)**: Add BFO labels to nodes
+- **[02_add_bfo_relationship_properties.cypher](neo4j_bfo/02_add_bfo_relationship_properties.cypher)**: Add BFO properties to relationships
+- **[03_verify_bfo_integration.cypher](neo4j_bfo/03_verify_bfo_integration.cypher)**: Verify BFO compliance
+- **[00_update_consensus_validation.cypher](neo4j_bfo/00_update_consensus_validation.cypher)**: Update consensus mappings
+- **[integration_test.cypher](neo4j_bfo/integration_test.cypher)**: Comprehensive integration tests
+
+### Key Commits
+
+- **BFO Integration Merge**: [1f77510](https://github.com/almanix00/ISGO/commit/1f77510)
+- **BFO Compliance Declaration**: [9b2dfab](https://github.com/almanix00/ISGO/commit/9b2dfab)
+
+### Benefits of BFO Standardization
+
+✅ **Interoperability**: ISO/IEC 21838-2 standard ensures compatibility with other BFO-compliant ontologies  
+✅ **Formal Semantics**: Clear, machine-readable definitions of entities and relationships  
+✅ **Reasoning Support**: Enhanced capability for automated reasoning and inference  
+✅ **Quality Assurance**: 100% coverage ensures all entities are properly categorized  
 
 ---
 
